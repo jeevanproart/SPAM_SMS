@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification</title>
+    <style>
+        .container{
+            position:relative;
+            margin-left: 12%;
+            margin-top: 6%;
+            width:75%;
+            height: 500px;
+            background-color: rgb(232, 229, 229);
+            border:3px solid black;
+            border-radius: 20px;
+        }
+        .heading{
+            position:relative;
+            font-size: 60px;
+            margin-left: 30%;
+            margin-bottom: 0px;
+        }
+        .line{
+            position: relative;
+            top:1%;
+        }
+        .windows{
+            position: relative;
+            top:6%;
+            margin: 0px 2%;
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: 350px 350px;
+            grid-gap: 10px;
+        }
+        .items1,.items2{
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+        .text1,.text2{
+            text-align: center;
+            font-size: 30px;
+        }
+        input[type="submit"],input[type="reset"]{
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            border: 1px solid black;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        table{
+            margin-top: 5%;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">Spam SMS Detection</div>
+        <hr class="line">
+        <div class="windows">
+            <div class="items1">
+                <div class="text1">INPUT</div>
+                <hr class="line1">
+                <form class="grid" action="/result" method="post">
+                    <label for="Name" style="margin-left: 2%; font-size: larger; font-weight: bold;">Enter the message</label>
+                    <textarea name="Name" id="Name" cols="50" rows="5" style="width: 95%; margin-left: 2%;"></textarea>
+                    <center>
+                        <div class="button">
+                            <input type="submit" class="file_submit">
+                            <input type="reset" value="Clear">
+                        </div>
+                    </center>
+                </form>
+            </div>
+            <div class="items2">
+                <div class="text2">OUTPUT</div>
+                <hr class="line2">
+                <div class="answer">
+                    <center>
+                        {% if p %}
+                            {% if p == "ham" %}
+                                <h1 style="color:rgb(35, 172, 53); font-weight: 900;">* This is a non-spam message</h1>
+                            {% else %}
+                                <h1 style="color:red; font-weight: 900;">! This is a spam message</h1>
+                            {% endif %}
+                        {% endif %}
+                        <table border="1px" cellpadding="5px" cellspacing="0px">
+                            <tr>
+                                <th>Total</th>
+                                <th>Spam</th>
+                                <th>Non-Spam</th>
+                            </tr>
+                            <tr>
+                                <th>{{ t }}</th>
+                                <th>{{ s }}</th>
+                                <th>{{ h }}</th>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
